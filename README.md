@@ -90,6 +90,14 @@ We first examined the distribution protein macro percentage in the recipe. As th
 ></iframe>
 
 ### Bivariate Analysis
+The box plot illustrates the distribution of macro percentages (protein, fat, and carbohydrates) across different user ratings for recipes. Higher-rated recipes (ratings 4 and 5) tend to have more balanced macro distributions, with fat and carbohydrates often dominating over protein, reflecting user preferences for these compositions.
+
+<iframe
+  src="assets/macro_comparison_by_rating.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 ### Interesting Aggregates
 
@@ -97,10 +105,40 @@ We first examined the distribution protein macro percentage in the recipe. As th
 
 ### NMAR Analysis
 
+In the context of recipe reviews, missing reviews might be NMAR because users tend to leave a review only if they feel strongly about the recipe (positive or negative) or if the recipe significantly meets or fails their expectations. If users try a recipe and find it unremarkable or not worth mentioning, they might skip leaving a review altogether, effectively "moving on." This behavior means the likelihood of a missing review depends on the user's perception of the recipe's quality or relevance, which is not explicitly captured in the dataset.
+
 ### Missingness Dependency
 
 ## Hypothesis Testing
+Null Hypothesis: The average rating of high-protein recipes is equal to the average rating of non-high-protein recipes. Alternative Hypothesis: The average rating of high-protein recipes is different from the average rating of non-high-protein recipes. Test Statistic: The difference in mean ratings between the high-protein and non-high-protein recipe groups. Significance Level: 0.05.
 
-#### Conclusion of Permutation Test
+We conducted a permutation test to determine whether high-protein recipes receive significantly different ratings compared to non-high-protein recipes. A permutation test is appropriate because it does not assume any specific population distribution, making it ideal for situations where prior knowledge about the population is unavailable.
+
+The test statistic, the difference in mean ratings, was chosen because it directly measures the relationship between recipe ratings and high-protein content. This aligns with our directional hypothesis that high-protein recipes might receive higher ratings due to perceived health benefits.
+
+The observed difference in mean ratings was -0.0146, suggesting a slight decrease in ratings for high-protein recipes compared to non-high-protein ones. To evaluate the significance of this difference, we generated a null distribution by shuffling group labels (high-protein vs. non-high-protein) 1,000 times and calculating the test statistic for each shuffle. The resulting p-value of 1.000 indicates that the observed difference is entirely consistent with the null hypothesis.
+
+<iframe
+  src="assets/macro_comparison_by_rating.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+Conclusion: Based on this analysis, we fail to reject the null hypothesis. This suggests that high-protein content does not significantly influence recipe ratings. These results imply that other factors, such as taste, preparation time, or ingredient variety, may play a larger role in determining user ratings on this platform.
 
 ## Framing a Prediction Problem
+
+Our prediction problem aims to predict the rating of a recipe based on its features, making this a regression task.
+
+The response variable is rating, a continuous variable representing user evaluations.
+
+Predictors include recipe preparation attributes such as minutes (cooking time), n_steps (number of steps), and n_ingredients (number of ingredients), as well as nutritional information like protein_percentage, carbs_percentage, and fat_percentage.
+
+We will evaluate the model using Mean Absolute Error (MAE), chosen for its interpretability in measuring the average magnitude of prediction errors, and R-squared to assess the overall variance explained by the model. These metrics are well-suited for regression and allow us to measure the accuracy and effectiveness of the predictions. The selected features are available at the time of prediction, making them valid inputs for this task.
+
+## Baseline
+
+## Final
+
+# Fairness Analysis
