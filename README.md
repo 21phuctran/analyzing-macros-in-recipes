@@ -80,6 +80,14 @@ After performing the necessary data cleaning steps, the dataset was refined to i
 | 412 broccoli casserole                | 306168  | 40          | 2008-05-30    | ['60-minutes-or-less', 'time-to-make',...] | 6           | ['Preheat oven to 350°F...',...] | 9                  | 2013-08-02     | 5.0        | ... | 3.0                      | 11.0                | 15.6            | 8.25             | 34.85            | 31.56           | 44.76        | 23.67          | False            | 0.031               |
 
 ### Univariate Analysis
+We first examined the distribution protein macro percentage in the recipe. As the plot belows reveals, the distribution is skewed to the right, which suggests that most recipes on food do not have high protein percentage in their nutrition. Additionally, as the protein percentage increases, there are less recipes. 
+
+<iframe
+  src="assets/protein_percentage_distribution.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
 
 ### Bivariate Analysis
 
