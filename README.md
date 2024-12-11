@@ -8,8 +8,6 @@ Bodybuilding involves progressive resistance exercise to build and shape muscles
 
 With the rising popularity of health and fitness, platforms like Food.com play a key role in helping users discover recipes that meet their dietary needs. In this analysis, I aim to explore whether recipes with a higher protein macro percentage tend to receive higher ratings on Food.com. This question is important for understanding how nutritional composition, particularly protein content, influences user preferences.
 
-To investigate this, I will analyze the relationship between protein content and user ratings using statistical methods and data visualization techniques. By uncovering this relationship, recipe developers can create more appealing high-protein recipes, and individuals pursuing fitness goals can make informed choices without compromising on satisfaction or popularity.
-
 The dataset interactions contains 731927 user reviews on each food with 5 columns below
 
 | Column        | Description         |
@@ -37,10 +35,15 @@ The dataset recipe contains 83782 rows and 12 columns. This means that there are
 | `'ingredients'`    | Text for recipe ingredients                                                                                                                                                                       |
 | `'n_ingredients'`  | Number of ingredients in recipe   
 
+To investigate this, I will analyze the relationship between protein content and user ratings using statistical methods and data visualization techniques. By uncovering this relationship, recipe developers can create more appealing high-protein recipes, and individuals pursuing fitness goals can make informed choices without compromising on satisfaction or popularity.
 
 ## Data Cleaning and Exploratory Data Analysis
 
-During my 
+Before we analyze the data, we must clean it
+
+1. We first merge the two datasets together to get their rating and review
+
+2. 
 #### Result
 
 ### Univariate Analysis
