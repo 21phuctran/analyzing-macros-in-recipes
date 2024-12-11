@@ -138,7 +138,41 @@ Predictors include recipe preparation attributes such as minutes (cooking time),
 We will evaluate the model using Mean Absolute Error (MAE), chosen for its interpretability in measuring the average magnitude of prediction errors, and R-squared to assess the overall variance explained by the model. These metrics are well-suited for regression and allow us to measure the accuracy and effectiveness of the predictions. The selected features are available at the time of prediction, making them valid inputs for this task.
 
 ## Baseline
+Our prediction problem aims to predict the rating of a recipe based on its features, making this a regression task.
 
+The response variable is rating, a continuous variable representing user evaluations. Predictors include recipe preparation attributes such as n_steps (number of steps) and high protein (a Boolean variable indicating whether the recipe is tagged as high protein). These features are chosen because they are readily available before a recipe is rated, making them valid predictors.
+
+We will evaluate the model using Mean Absolute Error (MAE), chosen for its interpretability in measuring the average magnitude of prediction errors, and R-squared (R²) to assess the overall variance explained by the model. These metrics are well-suited for regression and allow us to gauge the accuracy and effectiveness of the predictions.
+
+The baseline model, a simple linear regression using the selected features, achieved the following results:
+
+MAE: 0.4962
+R²: 0.00004
+
+While the low R² value suggests that the model explains very little of the variance in ratings, the MAE indicates the average prediction error is around 0.4962 rating points. This result highlights that the current model has room for improvement, particularly in capturing the complexity of user rating patterns. Future steps will focus on incorporating additional features and more advanced modeling techniques to enhance performance.
 ## Final
+For the final model, we improved upon the baseline model by engineering new features and performing hyperparameter tuning. Below are the details of the features we added, the transformations applied, and the rationale behind these choices.
 
-# Fairness Analysis
+### Features and Transformations
+
+#### 1. `'is_dessert'`
+This column categorizes recipes as either dessert or non-dessert, determined by checking if the recipe's tags contain the keyword `'dessert'`. From exploratory data analysis (EDA), we observed that higher ratings (4 and 5) are less frequent among dessert recipes. This trend suggests that `'is_dessert'` could be a useful predictor of ratings. We one-hot encoded this categorical feature, as it effectively represents the distinction between desserts and non-desserts in a way the model can understand.
+
+#### 2. `'minutes'`
+This column represents the cooking time of the recipe in minutes. From our bivariate analysis of `'minutes'` and `'rating'`, we found that recipes with longer cooking times tend to receive mediocre ratings (e.g., ratings of 2 or 3). This observation aligns with the intuition that recipes requiring more time to prepare might be less appealing to busy individuals. To make the values comparable across all recipes, we standardized the `'minutes'` feature using `StandardScaler`, ensuring that extreme values do not disproportionately influence the model.
+
+#### 3. `'calories (#)'`
+This column indicates the total calorie count of a recipe. EDA showed that recipes with higher ratings generally have fewer calories. Lower calorie counts are often associated with healthier recipes, which may be more appealing to users. Given that the `'calories (#)'` feature contains many outliers, we transformed it using `RobustScaler`. This scaler minimizes the effect of outliers and ensures that the model is less biased by extreme values.
+
+#### 4. `'n_steps'`
+This column represents the number of steps required to prepare a recipe. Bivariate analysis revealed that recipes with fewer steps are more likely to receive higher ratings. This trend likely reflects user preference for simpler and less time-intensive recipes. We used `StandardScaler` to normalize this feature and ensure it is on a comparable scale with other features.
+
+### Model Selection and Hyperparameter Tuning
+For our final model, we used a `LinearRegression` algorithm. We incorporated polynomial features to capture potential interactions and nonlinear relationships between predictors. We used `GridSearchCV` to perform hyperparameter tuning, specifically testing degrees of polynomial features (1, 2, and 3). This process ensured we identified the degree of polynomial features that minimized the mean absolute error (MAE).
+
+### Results
+The best model used a polynomial degree of 1, resulting in the following performance metrics:
+- **Mean Absolute Error (MAE):** 0.4962
+- **R-squared (R²):** 0.000045
+
+These results demonstrate a slight improvement over the baseline model. The additional features, particularly those engineered from our EDA findings, contributed to the model's ability to explain some variance in user ratings. However, the relatively low R² indicates that other factors not captured in our dataset may play a significant role in determining user ratings.
